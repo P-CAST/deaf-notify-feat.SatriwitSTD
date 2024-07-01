@@ -2,7 +2,7 @@ import { EmailTemplate } from "@/components/email-template";
 import { NextApiRequest, NextApiResponse } from "next";
 import { Resend } from 'resend';
 
-const resend = new Resend("re_anYbbrm2_LjR5CL5YmZ2zNbRBCNUJdVs5");
+const resend = new Resend("re_YoptCHuY_EUup1UTbL4G85vcBJaiWmWCT");
 
 export default async function getSession(req: NextApiRequest, res: NextApiResponse) {
     if (req.method == 'POST') {
