@@ -29,17 +29,25 @@ export default function LoginPage() {
   }
 
   const [isSession, setIsSession] = useState<boolean>(false)
+  const [sessionEmail, setSessionEmail] = useState(null)
 
   const getSessionFunc = async () => {
     const getSession = await fetch(`/api/getSession`, {})
-    if (await getSession.json()) setIsSession(true)
+    if (getSession.status === 200) {
+      setIsSession(true)
+      const sessionData = await getSession.json()
+      setSessionEmail(sessionData.email.session)
+    }
   }
 
   getSessionFunc()
  
   return (
     isSession
-    ? <button onClick={handleLogout} className="lgo-btn">Log out</button>
+    ? <div>
+        <h1>{sessionEmail}</h1>
+        <button onClick={handleLogout} className="lgo-btn">Log out</button>
+      </div>
     : <form onSubmit={handleLogin} className="lgn-form">
         <input type="email" name="email" placeholder="Email" required />
         <input type="password" name="password" placeholder="Password" required />

@@ -1,4 +1,19 @@
+import { products } from "@/products"
+
 export default function Products() {
+
+    async function handleAddToCart (n: number) {
+        if (products[n].quantity === 0) {
+            const response = await fetch(`/api/oos`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({})
+            })
+
+            if (response.ok) return
+        }
+    }
+
     return (
         <div>
             <div className="container">
@@ -11,16 +26,22 @@ export default function Products() {
                         <span>0</span>                               
                     </div>
                 </header>
-                <div className="listProduct">
-                    <div className="item">
-                        {/* <img src="images/1.png" alt=""> */}
-                        <h2>NAME PRODUCT</h2>
-                        <div className="price">$200</div>
-                        <button className="addCart">
-                            Add To Cart
-                        </button>
-                    </div>
-                </div>
+
+                {products.map((product, i) => {
+                    return (
+                        <div className="listProduct" key={i}>
+                            <div className="item">
+                                {/* <img src="images/1.png" alt=""> */}
+                                <h2>{product.name}</h2>
+                                <div className="price">{product.price}</div>
+                                <button onClick={() => handleAddToCart(product.id)} className="addCart">
+                                    Add To Cart
+                                </button>
+                            </div>
+                        </div>
+                    )
+                })}
+
             </div>
             <div className="cartTab">
                 <h1>Shopping Cart</h1>

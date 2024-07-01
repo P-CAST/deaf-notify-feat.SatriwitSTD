@@ -5,7 +5,7 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
     if (req.method == 'POST') {
         const sessionData = req.body
 
-        const cookie = serialize('session', sessionData, {
+        const cookie = serialize('session', sessionData.email, {
           httpOnly: true,
           secure: process.env.NODE_ENV === 'production',
           maxAge: 60 * 60 * 24 * 7, // One week
