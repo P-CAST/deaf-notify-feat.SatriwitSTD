@@ -2,11 +2,10 @@ import { EmailTemplate } from "@/components/email-template";
 import { NextApiRequest, NextApiResponse } from "next";
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend("re_anYbbrm2_LjR5CL5YmZ2zNbRBCNUJdVs5");
 
 export default async function getSession(req: NextApiRequest, res: NextApiResponse) {
     if (req.method == 'POST') {
-        console.log(resend)
         const cookie = req.cookies
         if (cookie['session']) {
             const email = cookie['session']
